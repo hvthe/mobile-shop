@@ -25,6 +25,11 @@
 				<h1 class="page-header">Danh sách thành viên</h1>
 			</div>
 		</div><!--/.row-->
+		@if(session()->exists('success'))
+		@foreach(session()->get('success') as $message)
+		<p class="alert alert-success" role="alert">{{ $message }}</p>
+		@endforeach
+		@endif
 		<div id="toolbar" class="btn-group">
             <a href="{{ route('add-user') }}" class="btn btn-success">
                 <i class="glyphicon glyphicon-plus"></i> Thêm thành viên
@@ -46,15 +51,20 @@
 						    </tr>
                             </thead>
                             <tbody>
+								@foreach($users as $user)
                                 <tr>
-                                    <td style="">1</td>
-                                    <td style="">Admin</td>
-                                    <td style="">admin@gmail.com</td>
+                                    <td style="">{{ $user->user_id }}</td>
+                                    <td style="">{{ $user->username}}</td>
+                                    <td style="">{{ $user->email }}</td>
+									@if( $user->user_level == 1)
                                     <td><span class="label label-danger">Admin</span></td>
+									@else
+                                    <td><span class="label label-warning">Member</span></td>
+									@endif
                                     <td class="form-group">
                                         <a href="{{ route('show-user', ['id' => 1]) }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                        <a class="btn btn-danger" data-target = "#delete" data-toggle = "modal"><i class="glyphicon glyphicon-remove"></i></a>
-                                        <div class="modal" tabindex="-1" id="delete">
+                                        <a class="btn btn-danger" data-target = "#delete-{{ $user->user_id }}" data-toggle = "modal"><i class="glyphicon glyphicon-remove"></i></a>
+                                        <div class="modal" tabindex="-1" id="delete-{{ $user->user_id }}">
 											<div class="modal-dialog" >
 												<div class="modal-content">
 													<div class="modal-header bg-primary">
@@ -64,11 +74,11 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														<p>Bạn muốn xóa ?</p>
+														<p>Bạn muốn xóa {{ $user->username}}?</p>
 													</div>
 													<div class="modal-footer">
 														<button class="btn btn-secondary" data-dismiss="modal">Close</button>
-														<a href	= "#" class="btn btn-danger">Xóa</a>
+														<a href	= "{{ route('delete-user', ['id' => 1]) }}" class="btn btn-danger">Xóa</a>
 													</div>
 												</div>
 											</div>
@@ -76,29 +86,12 @@
                                     </td>
 
                                 </tr>
-                                <tr>
-                                        <td style="">2</td>
-                                        <td style="">Nguyễn Văn A</td>
-                                        <td style="">nguyenvana@gmail.com</td>
-                                        <td><span class="label label-warning">Member</span></td>
-                                        <td class="form-group">
-                                            <a href="{{ route('show-user', ['id' => 2]) }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                            <a href="/" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                        </td>
-                                    </tr>
+								@endforeach
                             </tbody>
 						</table>
                     </div>
                     <div class="panel-footer">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
-                        </nav>
+                        {{ $users->links()}}
                     </div>
 				</div>
 			</div>

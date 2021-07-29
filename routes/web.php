@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,12 +43,12 @@ Route::prefix('category')->group (function () {
 });
 
 Route::prefix('user')->group (function () {
-    Route::get('/', function () {
-        return view('admin.modules.user.user');})->name('user');
-    Route::get('/add', function () {
-        return view('admin.modules.user.add_user');})->name('add-user');
-    Route::get('/show', function () {
-        return view('admin.modules.user.edit_user');})->name('show-user');
+    Route::get('/', [UserController::class, 'index'])->name('user');
+    Route::get('/add', [UserController::class, 'create'])->name('add-user');
+    Route::post('/store', [UserController::class, 'store'])->name('store-user');
+    Route::get('/show', [UserController::class, 'show'])->name('show-user');
+    Route::post('/update', [UserController::class, 'update'])->name('update-user');
+    Route::get('/delete', [UserController::class, 'destroy'])->name('delete-user');
 });
 
 

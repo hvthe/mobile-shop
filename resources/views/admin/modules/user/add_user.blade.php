@@ -32,22 +32,23 @@
                         <div class="panel-body">
                             <div class="col-md-8">
                             	<div class="alert alert-danger">Email đã tồn tại !</div>
-                                <form role="form" method="post">
+                                <form role="form" method="post" action = "{{ route('store-user') }}">
+                                @csrf
                                 <div class="form-group">
                                     <label>Họ & Tên</label>
-                                    <input name="user_full" required class="form-control" placeholder="">
+                                    <input name="username" class="form-control" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input name="user_mail" required type="text" class="form-control">
+                                    <input name="email" type="text" class="form-control">
                                 </div>                       
                                 <div class="form-group">
                                     <label>Mật khẩu</label>
-                                    <input name="user_pass" required type="password"  class="form-control">
+                                    <input name="password" type="password"  class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Nhập lại mật khẩu</label>
-                                    <input name="user_re_pass" required type="password"  class="form-control">
+                                    <input name="re_password" type="password"  class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Quyền</label>

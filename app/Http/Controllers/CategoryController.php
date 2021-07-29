@@ -30,11 +30,11 @@ class CategoryController extends Controller
                 'unique:category,cat_name'
             ]
         ]);
-        // $category = new Category;
-        // $category->cat_name = $request->cat_name;
-        // $category->save();
-        // session()->flash('success.created', 'Created');
-        // return redirect()->route('category');
+        $category = new Category;
+        $category->cat_name = $request->cat_name;
+        $category->save();
+        session()->flash('success.created', 'Created');
+        return redirect()->route('category');
     }
 
     public function show(Request $request)
