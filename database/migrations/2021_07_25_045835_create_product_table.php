@@ -16,7 +16,6 @@ class CreateProductTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->integer('prd_id')->autoIncrement();
-            // $table->primary('prd_id');
             $table->integer('cat_id');
             $table->string('prd_name', 255);
             $table->string('prd_price', 255);
@@ -27,9 +26,10 @@ class CreateProductTable extends Migration
             $table->string('prd_promotion', 255);
             $table->tinyInteger('prd_status');
             $table->tinyInteger('prd_featured');
+            $table->string('related_products')->nullable();
+            $table->integer('view')->default(0);
             $table->string('prd_details', 255);
-            $table->datetime('created');
-            $table->timestamp('last_update', $precision = 0);
+            $table->timestamps();
         });
     }
 

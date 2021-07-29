@@ -1,22 +1,14 @@
 @extends('admin.index')
-@section('sidebar')
-<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<form role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
-			</div>
-		</form>
+@section('menu')
 		<ul class="nav menu">
 			<li ><a href="{{ route ('index') }}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
 			<li ><a href="{{ route('user') }}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>Quản lý thành viên</a></li>
 			<li><a href="{{ route('category') }}"><svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>Quản lý danh mục</a></li>
 			<li class = "active"><a href="{{ route('product') }}"><svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>Quản lý sản phẩm</a></li>
-			<!-- <li><a href="comment.html"><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Quản lý bình luận</a></li>
-			<li><a href="ads.html"><svg class="glyph stroked chain"><use xlink:href="#stroked-chain"/></svg> Quản lý quảng cáo</a></li>
-			<li><a href="setting.html"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg> Cấu hình</a></li> -->
+			<li><a href="#"><svg class="glyph stroked chain"><use xlink:href="#stroked-chain"/></svg> Quản lý khách hàng</a></li>
+			<li><a href="#"><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Đơn hàng </a></li>
+			<li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg> Cấu hình</a></li>
 		</ul>
-
-</div>
 @endsection
 @section('title', 'Mobile Shop - Administrator')
 @section('content')
@@ -33,6 +25,11 @@
 				<h1 class="page-header">Danh sách sản phẩm</h1>
 			</div>
 		</div><!--/.row-->
+		@if(session()->exists('success'))
+		@foreach(session()->get('success') as $message)
+		<p class="alert alert-success" role="alert">{{ $message }}</p>
+		@endforeach
+		@endif
 		<div id="toolbar" class="btn-group">
             <a href="{{ route('create-product')}}" class="btn btn-success">
                 <i class="glyphicon glyphicon-plus"></i> Thêm sản phẩm
@@ -64,14 +61,14 @@
                                         <td class="align-middle" style="">{{$product->prd_id}}</td>
                                         <td class="align-middle" style="">{{$product->prd_name}}</td>
                                         <td class="align-middle" style="">{{ number_format($product->prd_price)}} vnd</td>
-                                        <td class="align-middle" style="text-align: center"><img width="130" height="180" src="{{ asset('admin/images/'.$product->prd_image)}}" /></td>
+                                        <td class="align-middle" style="text-align: center"><img height="180" src="{{ asset('admin/images/'.$product->prd_image)}}" /></td>
 										@if ($product->prd_status == 1)
 										<td class="align-middle" ><span class="label label-success">Còn hàng</span></td>
 										@else
 										<td class="align-middle" ><span class="label label-danger">Hết hàng</span></td>
 										@endif
 										<td class="align-middle" >{{$product->category->cat_name}}</td>
-										<td class="align-middle" >{{$product->last_update}}</td>
+										<td class="align-middle" >{{$product->updated_at}}</td>
                                         <td class="form-group align-middle">
                                             <a href="{{ route ('show-product', ['id' => $product->prd_id]) }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
                                             <a data-target = "#delete-{{ $product->prd_id }}" data-toggle="modal" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>

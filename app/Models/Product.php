@@ -10,7 +10,6 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $primaryKey = 'prd_id';
-    public $timestamps = false;
     protected $dateFormat = 'Y-m-d H:i:s';
     // protected $fillable = [];
 

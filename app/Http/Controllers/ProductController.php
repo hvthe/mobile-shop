@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;       
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProduct;
+use App\Http\Requests\UpdateProduct;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::paginate(5);
+        $products = Product::orderBy('prd_id', 'desc')->paginate(5);
         return view('admin.modules.product.product', compact('products', 'categories'));
     }
 
@@ -24,8 +25,9 @@ class ProductController extends Controller
         return view('admin.modules.product.add_product', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
+        
         $product = new Product;
         $product->prd_name = $request->prd_name;
         $product->cat_id = $request->cat_id;
@@ -38,7 +40,7 @@ class ProductController extends Controller
         $product->prd_status = $request->prd_status;
         $product->prd_featured = $request->prd_featured == 1 ? 1 : 0;
         $product->prd_details = $request->prd_details;
-        $product->created = date('Y-m-d H:i:s');
+        $product->created_at = date('Y-m-d H:i:s');
         if($request->hasFile('prd_image')){
             $file = $request->prd_image;
             $mimeType = $file->getMimeType();
@@ -52,6 +54,7 @@ class ProductController extends Controller
         }else{
             $product->prd_image = 'default.jpg';
         }
+        session()->flash('success.created', 'Created');
         $product->save();
         return redirect()->route('product');
     }
@@ -60,11 +63,11 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $prd_id = $request->id;
-        $product = Product::find($prd_id);
+        $product = Product::findOrFail($prd_id);
         return view('admin.modules.product.edit_product', compact('product', 'categories'));
     }
 
-    public function update(Request $request)
+    public function update(UpdateProduct $request)
     {
         $prd_id = $request->id;
         $product = Product::find($prd_id);
@@ -90,18 +93,24 @@ class ProductController extends Controller
             $product->prd_image = $filename;
             }
         }else{
-            $product->prd_image = $request->prd_image;
+            $product->prd_image = $request->prd_image_old;
         }
-        // dd($product);
         $product->save();
+        session()->flash('success.updated', 'Updated');
         return redirect()->route('product');
     }
 
     public function destroy(Request $request)
     {
         $prd_id = $request->id;
-        Product::destroy($prd_id);
+        $product = Product::findOrFail($prd_id);
+        $filename = "./admin/images/{$product->prd_image}";
+        $product->delete();
+        if(file_exists($filename)){
+            unlink($filename);
+        }
+        // Storage::delete($product->prd_image);
+        session()->flash('success.delete', 'Deleted');
         return redirect()->route('product');
     }
-
 }
