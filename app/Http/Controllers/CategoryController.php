@@ -16,6 +16,5 @@ class CategoryController extends Controller
 
 
 
-        // return view('admin.modules.category.category', compact('category'));
     }
 }
