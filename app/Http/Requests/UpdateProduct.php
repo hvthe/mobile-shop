@@ -25,6 +25,7 @@ class UpdateProduct extends FormRequest
     {
         return [
             'prd_name' => 'required|min:4|max:40',
+            'cat_id' => 'required|exists:category,cat_id',
             'prd_price' => 'required|numeric|min:0',
             'prd_image' => 'sometimes|image',
             'prd_warranty' => 'required',

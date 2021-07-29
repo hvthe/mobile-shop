@@ -22,11 +22,19 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->cat_name = $request->cat_name;
-        $category->save();
-        session()->flash('success.created', 'Created');
-        return redirect()->route('category');
+        $validated = $request->validate([
+            'cat_name' => [
+                'required',
+                'min:6',
+                'max:30',
+                'unique:category,cat_name'
+            ]
+        ]);
+        // $category = new Category;
+        // $category->cat_name = $request->cat_name;
+        // $category->save();
+        // session()->flash('success.created', 'Created');
+        // return redirect()->route('category');
     }
 
     public function show(Request $request)

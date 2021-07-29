@@ -25,6 +25,7 @@ class StoreProduct extends FormRequest
     {
         return [
             'prd_name' => 'required|min:4|max:40',
+            'cat_id' => 'required|exists:category,cat_id',
             'prd_price' => 'required|integer|min:0',
             'prd_image' => 'required|image',
             'prd_warranty' => 'required',

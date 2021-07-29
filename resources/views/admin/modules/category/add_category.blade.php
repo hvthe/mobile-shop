@@ -30,13 +30,16 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-md-8">
-                        	<div class="alert alert-danger">Danh mục đã tồn tại !</div>
+                        	<!-- <div class="alert alert-danger">Danh mục đã tồn tại !</div> -->
                             <form action = "{{route('store-category')}}" role="form" method="post">
                             @csrf
 							<div class="form-group">
                                 <label>Tên danh mục:</label>
-                                <input required type="text" name="cat_name" class="form-control" placeholder="Tên danh mục...">
-                            </div>
+                                <input type="text" name="cat_name" class="form-control" placeholder="Tên danh mục...">
+								@if($errors->all())
+								<p class="text-danger">{{$errors->first('cat_name')}}</p>
+								@endif
+							</div>
                             <button type="submit" name="sbm" class="btn btn-success">Thêm mới</button>
                             <button type="reset" class="btn btn-default">Làm mới</button>
                         </div>
