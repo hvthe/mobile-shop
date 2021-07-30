@@ -15,7 +15,7 @@ class UserController extends Controller
             'password' => 'required|min:2',
         ]);
         $email = $request->email;
-        $password = $request->password;
+        $password = md5($request->password);
         $user = User::where('email', $email)->where('password', $password)->first();
         if($user){
             session()->put('email', $user->email);
