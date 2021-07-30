@@ -7,6 +7,30 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function checkUser(Request $request)
+    {
+        
+        $validated = $request->validate([
+            'email' => 'required|email|exists:users,email|min:8',
+            'password' => 'required|min:2',
+        ]);
+        $email = $request->email;
+        $password = $request->password;
+        $user = User::where('email', $email)->where('password', $password)->first();
+        if($user){
+            session()->put('email', $user->email);
+            session()->put('username', $user->username);
+            session()->put('user_level', $user->user_level);
+            return redirect()->route('index');
+        } else{
+            session()->flash('loginFail', true);
+            return view('admin.login', compact('email'));
+        }
+    }
+    public function logout(){
+        session()->pull('email');
+        return redirect()->route('login');
+    }
     public function index()
     {
         $users = User::orderBy('user_id')->paginate(5);

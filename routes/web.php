@@ -16,39 +16,47 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-})->name('index');
-
 Route::get('/login', function () {
-    return view('admin.login');
+    if(session()->has('email')){
+        return redirect()->route('index');
+    }else{
+        return view('admin.login');
+    }
 })->name('login');
 
-Route::prefix('product')->group (function () {
-    Route::get('/', [ProductController::class, 'index'])->name('product');
-    Route::get('/create', [ProductController::class, 'create'])->name('create-product');
-    Route::post('/add', [ProductController::class, 'store'])->name('add-product');
-    Route::get('/show', [ProductController::class, 'show'])->name('show-product');
-    Route::post('/update', [ProductController::class, 'update'])->name('update-product');
-    Route::get('/delete', [ProductController::class, 'destroy'])->name('delete-product');
-});
+Route::post('/login', [UserController::class, 'checkUser']);
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::prefix('category')->group (function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('category');
-    Route::get('/create', [CategoryController::class, 'create'])->name('create-category');
-    Route::post('/store', [CategoryController::class, 'store'])->name('store-category');
-    Route::get('/show', [CategoryController::class, 'show'])->name('show-category');
-    Route::post('/update', [CategoryController::class, 'update'])->name('update-category');
-    Route::get('/delete', [CategoryController::class, 'destroy'])->name('delete-category');
-});
+Route::middleware('CheckLogin')->group (function (){
+    Route::get('/', function (){
+        return view('admin.dashboard');})->name('index');
 
-Route::prefix('user')->group (function () {
-    Route::get('/', [UserController::class, 'index'])->name('user');
-    Route::get('/add', [UserController::class, 'create'])->name('add-user');
-    Route::post('/store', [UserController::class, 'store'])->name('store-user');
-    Route::get('/show', [UserController::class, 'show'])->name('show-user');
-    Route::post('/update', [UserController::class, 'update'])->name('update-user');
-    Route::get('/delete', [UserController::class, 'destroy'])->name('delete-user');
+    Route::prefix('product')->group (function () {
+        Route::get('/', [ProductController::class, 'index'])->name('product');
+        Route::get('/create', [ProductController::class, 'create'])->name('create-product');
+        Route::post('/add', [ProductController::class, 'store'])->name('add-product');
+        Route::get('/show', [ProductController::class, 'show'])->name('show-product');
+        Route::post('/update', [ProductController::class, 'update'])->name('update-product');
+        Route::get('/delete', [ProductController::class, 'destroy'])->name('delete-product');
+    });
+    
+    Route::prefix('category')->group (function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('category');
+        Route::get('/create', [CategoryController::class, 'create'])->name('create-category');
+        Route::post('/store', [CategoryController::class, 'store'])->name('store-category');
+        Route::get('/show', [CategoryController::class, 'show'])->name('show-category');
+        Route::post('/update', [CategoryController::class, 'update'])->name('update-category');
+        Route::get('/delete', [CategoryController::class, 'destroy'])->name('delete-category');
+    });
+    
+    Route::prefix('user')->group (function () {
+        Route::get('/', [UserController::class, 'index'])->name('user');
+        Route::get('/add', [UserController::class, 'create'])->name('add-user');
+        Route::post('/store', [UserController::class, 'store'])->name('store-user');
+        Route::get('/show', [UserController::class, 'show'])->name('show-user');
+        Route::post('/update', [UserController::class, 'update'])->name('update-user');
+        Route::get('/delete', [UserController::class, 'destroy'])->name('delete-user');
+    });
 });
 
 

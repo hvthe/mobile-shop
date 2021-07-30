@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vietpro Mobile Shop - Administrator</title>
+<title>Mobile Shop - Administrator</title>
 
 <link href="{{ asset ('admin/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset ('admin/css/datepicker3.css') }}" rel="stylesheet">
@@ -25,14 +25,23 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
-					<div class="alert alert-danger">Tài khoản không hợp lệ !</div>
+					@if(session()->exists('loginFail'))
+					<div class="alert alert-danger"> Sai mật khẩu !</div>
+					@endif
 					<form role="form" method="post">
+						@csrf
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="mail" type="email" autofocus>
+								<input class="form-control" placeholder="E-mail" name="email" type="" autofocus value = "{{ isset($email)? $email : old('email') }}">
+								@if($errors->has('email'))
+								<p class="text-danger">{{$errors->first('email')}}</p>
+								@endif
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Mật khẩu" name="pass" type="password" value="">
+								<input class="form-control" placeholder="Mật khẩu" name="password" type="password">
+								@if($errors->has('password'))
+								<p class="text-danger">{{$errors->first('password')}}</p>
+								@endif
 							</div>
 							<div class="checkbox">
 								<label>
