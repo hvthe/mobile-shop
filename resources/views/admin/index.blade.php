@@ -71,7 +71,8 @@
 	<script src="{{ asset ('admin/js/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ asset ('admin/js/bootstrap.min.js') }}"></script>	
 	<script src="{{ asset ('admin/js/bootstrap-table.js') }}"></script>	
-	<script src="{{ asset ('admin/js/main.js') }}"></script>	
+	<script src="{{ asset ('admin/js/main.js') }}"></script>
+	@yield('listdata')
 </body>
 
 </html>
