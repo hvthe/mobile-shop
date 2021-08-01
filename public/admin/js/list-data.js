@@ -1,18 +1,19 @@
-var pageLink = document.querySelectorAll('a.page-link');
-console.log(pageLink[2]);
-for(var i = 0; i < pageLink.length; i++){
-  pageLink.onclick = function (){
-    var xmlHttp;
-          xmlHttp = new XMLHttpRequest();
-          xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
-  // tiep nhan du lieu
-      xmlHttp.onreadystatechange = function(){
-          if(xmlHttp.readyState == 4){
-              document.getElementById('featured__product').innerHTML = xmlHttp.responseText;
+var pageLinks = document.querySelectorAll('.page-link');
+console.log(pageLinks[2].innerHTML)
+for(var i = 0; i < pageLinks.length; i++){
+      var pageLink = pageLinks[i];
+      pageLink.onclick = function (event){
+        event.preventDefault();
+        document.querySelector('.page-item.active').classList.remove('active');
+        this.parentElement.classList.add('active');
+        page = this.href.split('page=')[1];
+        $.ajax({
+          url: "/product?page="+page,
+          success: function(data)
+          {
+            document.querySelector('#list-data').innerHTML = data
           }
-      }
-  // gui yeu cau
-      xmlHttp.open('GET', pageLink[i].href,true);
-      xmlHttp.send(null);
-  }
+        })
+      } 
 }
+    

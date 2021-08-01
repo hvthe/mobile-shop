@@ -38,10 +38,16 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					@include('admin.modules.product.list-data')
+					<div class="panel-body" id = "list-data">
+						@include('admin.modules.product.list-data')
+					</div>
 				</div>
 			</div>
 		</div><!--/.row-->	
+		<div class="panel-footer">
+			
+						{{ ($products->links()) }}
+		</div>
 	</div>
 @endsection
 

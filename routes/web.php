@@ -30,7 +30,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::middleware('CheckLogin')->group (function (){
     Route::get('/', function (){
         return view('admin.dashboard');})->name('index');
-
+    Route::get('/list-data', [ProductController::class, 'listData']);
     Route::prefix('product')->group (function () {
         Route::get('/', [ProductController::class, 'index'])->name('product');
         Route::get('/create', [ProductController::class, 'create'])->name('create-product');

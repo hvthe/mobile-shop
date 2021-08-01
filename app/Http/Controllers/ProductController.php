@@ -12,11 +12,22 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
         $products = Product::orderBy('prd_id', 'desc')->paginate(5);
+        if($request->ajax()){
+        return view('admin.modules.product.list-data', compact('products', 'categories'))->render();
+        }
         return view('admin.modules.product.product', compact('products', 'categories'));
+    }
+
+    public function listData(Request $request)
+    {
+        $categories = Category::all();
+        $products = Product::orderBy('prd_id', 'desc')->paginate(5);
+        return view('admin.modules.product.list-data', compact('products', 'categories'))->render();
+            
     }
 
     public function create()
