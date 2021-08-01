@@ -9,3 +9,5 @@
 1. chức năng login, logout
 2. middleware login
 3. khong truy cap vao trang login khi da dang nhap
+# 01/08
+1. hiển thị đơn hàng, chi tiết đơn hàng
