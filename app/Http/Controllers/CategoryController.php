@@ -9,9 +9,12 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::orderBy('cat_id', 'desc')->paginate(5);
+        if($request->ajax()){
+            return view('admin.modules.category.data-cat', compact('categories'))->render();
+        }
         return view('admin.modules.category.category', compact('categories'));
     }
 
@@ -46,6 +49,12 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
+        $validated = $request->validate([
+            'cat_name' => 'required|min:6|max:30'
+        ], [
+            'required' => 'Không được để trống',
+            'min' => 'Độ dài có ít nhất 6 ký tự'
+        ]);
         $cat_id = $request->id;
         $category = Category::findOrFail($cat_id);
         $category->cat_name = $request->cat_name;

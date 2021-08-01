@@ -38,7 +38,6 @@
                                     <label>Tên sản phẩm</label>
                                     <input type="text" name="prd_name" class="form-control" value="{{ is_string(old('prd_name')) ? old('prd_name') : $product->prd_name }}"  placeholder="">
                                     @if($errors->first('prd_name'))
-                                    {{dd($request->all());}}
                                     <p class="text-danger">{{$errors->first('prd_name')}}</p>
                                     @endif
                                 </div>

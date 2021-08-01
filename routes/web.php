@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LanguageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,11 +27,13 @@ Route::get('/login', function () {
 
 Route::post('/login', [UserController::class, 'checkUser']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
+Route::group(['middleware' => 'local'], function () {
+});
 Route::middleware('CheckLogin')->group (function (){
     Route::get('/', function (){
         return view('admin.dashboard');})->name('index');
-    Route::get('/list-data', [ProductController::class, 'listData']);
+    Route::get('language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
+    
     Route::prefix('product')->group (function () {
         Route::get('/', [ProductController::class, 'index'])->name('product');
         Route::get('/create', [ProductController::class, 'create'])->name('create-product');
@@ -58,6 +61,7 @@ Route::middleware('CheckLogin')->group (function (){
         Route::get('/delete', [UserController::class, 'destroy'])->name('delete-user');
     });
 });
+
 
 
 

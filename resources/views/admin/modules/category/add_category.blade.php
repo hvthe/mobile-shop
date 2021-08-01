@@ -35,7 +35,7 @@
                             @csrf
 							<div class="form-group">
                                 <label>Tên danh mục:</label>
-                                <input type="text" name="cat_name" class="form-control" placeholder="Tên danh mục...">
+                                <input type="text" name="cat_name" class="form-control" value = "{{ old('cat_name') }}" placeholder="Tên danh mục...">
 								@if($errors->all())
 								<p class="text-danger">{{$errors->first('cat_name')}}</p>
 								@endif

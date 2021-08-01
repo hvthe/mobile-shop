@@ -22,14 +22,6 @@ class ProductController extends Controller
         return view('admin.modules.product.product', compact('products', 'categories'));
     }
 
-    public function listData(Request $request)
-    {
-        $categories = Category::all();
-        $products = Product::orderBy('prd_id', 'desc')->paginate(5);
-        return view('admin.modules.product.list-data', compact('products', 'categories'))->render();
-            
-    }
-
     public function create()
     {
         $categories = Category::all();

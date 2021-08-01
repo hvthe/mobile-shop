@@ -78,12 +78,12 @@
 					page = this.href.split('page=')[1];
 					$.ajax({
 						url: "/product?page="+page,
-						success: function(data)
-						{
+						type: "GET",
+						dataType: 'html',
+					}).done(function(data){
 							$('#list-data').html(data);
 							// document.querySelector('#list-data').innerHTML = data
-						}
-					})
+						});
 				}
 			}
 		</script>

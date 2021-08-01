@@ -23,7 +23,7 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Danh mục:Danh mục 1</h1>
+				<h1 class="page-header">{{ $category->cat_name }}</h1>
 			</div>
 		</div><!--/.row-->
         <div class="row">
@@ -36,7 +36,10 @@
 								@csrf
 								<div class="form-group">
 									<label>Tên danh mục:</label>
-									<input type="text" name="cat_name" required value="{{ $category->cat_name }}" class="form-control">
+									<input type="text" name="cat_name" value="{{ $category->cat_name }}" class="form-control">
+									@if($errors->all())
+									<p class="text-danger">{{$errors->first('cat_name')}}</p>
+									@endif
 								</div>
 								<button type="submit" name="sbm" class="btn btn-primary">Cập nhật</button>
 								<button type="reset" class="btn btn-default">Làm mới</button>
