@@ -1,4 +1,13 @@
-						<table data-toolbar="#toolbar" data-toggle="table">
+<div id="toolbar" class="btn-group">
+            <a href="{{ route('create-product')}}" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus"></i> Thêm sản phẩm
+            </a>
+        </div>
+<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-body" >
+					<table data-toolbar="#toolbar" data-toggle="table">
 						<thead>
 							<tr>
 								<th data-field="id" data-sortable="true">ID</th>
@@ -52,3 +61,29 @@
 							@endforeach
 							</tbody>
 						</table>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->	
+		<div class="panel-footer">
+			{!! $products->links() !!}
+		</div>
+		<script src="{{ asset ('admin/js/bootstrap-table.js') }}"></script>
+		<script>
+			var pageLinks = document.querySelectorAll('.page-link');
+			for(var i = 0; i < pageLinks.length; i++){
+			var pageLink = pageLinks[i];
+				pageLink.onclick = function (event){
+					event.preventDefault();
+					page = this.href.split('page=')[1];
+					$.ajax({
+						url: "/product?page="+page,
+						success: function(data)
+						{
+							$('#list-data').html(data);
+							// document.querySelector('#list-data').innerHTML = data
+						}
+					})
+				}
+			}
+		</script>

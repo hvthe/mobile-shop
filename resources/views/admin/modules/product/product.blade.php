@@ -30,27 +30,9 @@
 		<p class="alert alert-success" role="alert">{{ $message }}</p>
 		@endforeach
 		@endif
-		<div id="toolbar" class="btn-group">
-            <a href="{{ route('create-product')}}" class="btn btn-success">
-                <i class="glyphicon glyphicon-plus"></i> Thêm sản phẩm
-            </a>
-        </div>
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-body" id = "list-data">
-						@include('admin.modules.product.list-data')
-					</div>
-				</div>
-			</div>
-		</div><!--/.row-->	
-		<div class="panel-footer">
-			
-						{{ ($products->links()) }}
+		<div id="list-data">
+		@include('admin.modules.product.list-data')
 		</div>
+		
 	</div>
-@endsection
-
-@section('listdata')
-<script src="{{ asset ('admin/js/list-data.js') }}"></script>
 @endsection
