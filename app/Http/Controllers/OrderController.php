@@ -17,10 +17,6 @@ class OrderController extends Controller
     {
         $ord_id = $request->id;
         $order = Order::findOrFail($ord_id);
-        // dump($order->customer->name);
-        // dump($order->customer->phone);
-        // dump($order->customer->address);
-        // dump($order->value);
         $products = $order->products;
         return view('admin.modules.order.order-detail', compact('order', 'products'));
     }

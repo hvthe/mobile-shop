@@ -41,7 +41,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Mã đơn hàng 12348</h1>
+            <h1 class="page-header">Mã đơn hàng #{{ $order->ord_id}}</h1>
         </div>
     </div>
     <!--/.row-->

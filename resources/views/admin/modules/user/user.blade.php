@@ -53,9 +53,9 @@
                             <tbody>
 								@foreach($users as $user)
                                 <tr>
-                                    <td style="">{{ $user->user_id }}</td>
-                                    <td style="">{{ $user->username}}</td>
-                                    <td style="">{{ $user->email }}</td>
+                                    <td>{{ $user->user_id }}</td>
+                                    <td>{{ $user->username}}</td>
+                                    <td>{{ $user->email }}</td>
 									@if( $user->user_level == 1)
                                     <td><span class="label label-danger">Admin</span></td>
 									@else
