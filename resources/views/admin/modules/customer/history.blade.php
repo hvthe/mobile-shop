@@ -13,10 +13,10 @@
     <li><a href="{{ route('product') }}"><svg class="glyph stroked bag">
                 <use xlink:href="#stroked-bag"></use>
             </svg>Quản lý sản phẩm</a></li>
-    <li><a href="{{ route('customer') }}"><svg class="glyph stroked chain">
+    <li class="active"><a href="{{ route('customer') }}"><svg class="glyph stroked chain">
                 <use xlink:href="#stroked-chain" />
             </svg> Quản lý khách hàng</a></li>
-    <li class="active"><a href="{{ route('order') }}"><svg class="glyph stroked clipboard with paper">
+    <li><a href="{{ route('order') }}"><svg class="glyph stroked clipboard with paper">
                 <use xlink:href="#stroked-clipboard-with-paper"></use>
             </svg> Đơn hàng </a></li>
     <li><a href="#"><svg class="glyph stroked gear">
@@ -34,22 +34,17 @@
             <li><a href="{{ route('index')}}"><svg class="glyph stroked home">
                         <use xlink:href="#stroked-home"></use>
                     </svg></a></li>
-            <li class="active">Danh sách đơn hàng</li>
+            <li class="active">Quản lý khách hàng</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Danh sách đơn hàng</h1>
+            <h1 class="page-header">Lịch sử mua hàng của {{$customer->name}}</h1>
         </div>
     </div>
     <!--/.row-->
-    @if(session()->exists('success'))
-    @foreach(session()->get('success') as $message)
-    <p class="alert alert-success" role="alert">{{ $message }}</p>
-    @endforeach
-    @endif
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -113,9 +108,13 @@
         </div>
     </div>
     <!--/.row-->
-    <div class="panel-footer">
-        {!! $orders->links() !!}
+    <div class="btn-group">
+        <a href="{{ route('customer') }}" class="btn btn-info btn-sm">
+           <i class="glyphicon glyphicon-chevron-left"></i> Quay lại
+        </a>
     </div>
+    <!-- <div class="panel-footer">
+    </div> -->
 
 </div>
 @endsection

@@ -13,7 +13,7 @@
     <li><a href="{{ route('product') }}"><svg class="glyph stroked bag">
                 <use xlink:href="#stroked-bag"></use>
             </svg>Quản lý sản phẩm</a></li>
-    <li><a href="#"><svg class="glyph stroked chain">
+    <li><a href="{{ route('customer') }}"><svg class="glyph stroked chain">
                 <use xlink:href="#stroked-chain" />
             </svg> Quản lý khách hàng</a></li>
     <li class="active"><a href="{{ route('order') }}"><svg class="glyph stroked clipboard with paper">
