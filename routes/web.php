@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LanguageController;
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,15 @@ Route::middleware('CheckLogin')->group (function (){
         Route::get('/show', [UserController::class, 'show'])->name('show-user');
         Route::post('/update', [UserController::class, 'update'])->name('update-user');
         Route::get('/delete', [UserController::class, 'destroy'])->name('delete-user');
+    });
+
+    Route::prefix('order')->group (function () {
+        Route::get('/', [OrderController::class, 'index'])->name('order');
+        Route::get('/create', [OrderController::class, 'create'])->name('create-order');
+        Route::post('/store', [OrderController::class, 'store'])->name('store-order');
+        Route::get('/detail', [OrderController::class, 'detail'])->name('detail-order');
+        Route::post('/update', [OrderController::class, 'update'])->name('update-order');
+        Route::get('/delete', [OrderController::class, 'destroy'])->name('delete-order');
     });
 });
 

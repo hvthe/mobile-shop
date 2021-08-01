@@ -17,8 +17,8 @@
 	<li><a href="#"><svg class="glyph stroked chain">
 				<use xlink:href="#stroked-chain" />
 			</svg> Quản lý khách hàng</a></li>
-	<li><a href="#"><svg class="glyph stroked two messages">
-				<use xlink:href="#stroked-two-messages" />
+	<li><a href="{{ route('order') }}"><svg class="glyph stroked clipboard with paper">
+				<use xlink:href="#stroked-clipboard-with-paper"></use>
 			</svg> Đơn hàng </a></li>
 	<li><a href="#"><svg class="glyph stroked gear">
 				<use xlink:href="#stroked-gear" />

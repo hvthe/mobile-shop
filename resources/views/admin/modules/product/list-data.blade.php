@@ -23,9 +23,9 @@
 						<tbody>
 								@foreach($products as $key => $product)
 								<tr>
-									<td class="align-middle" style="">{{$product->prd_id}}</td>
-									<td class="align-middle" style="">{{$product->prd_name}}</td>
-									<td class="align-middle" style="">{{ number_format($product->prd_price)}} vnd</td>
+									<td class="align-middle">{{$product->prd_id}}</td>
+									<td class="align-middle">{{$product->prd_name}}</td>
+									<td class="align-middle">{{ number_format($product->prd_price)}} vnd</td>
 									<td class="align-middle" style="text-align: center"><img height="100" src="{{ asset('admin/images/'.$product->prd_image)}}" /></td>
 									@if ($product->prd_status == 1)
 									<td class="align-middle" ><span class="label label-success">Còn hàng</span></td>

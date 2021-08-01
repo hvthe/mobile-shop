@@ -19,8 +19,8 @@
 						<tbody>
 							@foreach($categories as $category)
 							<tr>
-								<td style="">{{ $category->cat_id }}</td>
-								<td style="">{{ $category->cat_name }}</td>
+								<td >{{ $category->cat_id }}</td>
+								<td >{{ $category->cat_name }}</td>
 								<td class="form-group">
 									<a href="{{ route('show-category', ['id' => $category->cat_id]) }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
 									<a class="btn btn-danger" data-toggle="modal" data-target="#delete-{{$category->cat_id}}"><i class="glyphicon glyphicon-remove"></i></a>
