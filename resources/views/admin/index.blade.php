@@ -61,12 +61,13 @@
 			</div>
 		</form>
 		<?php $route = Route::current()->uri;
-		$route = explode('/', $route)[0];
+		$route = explode('/', $route);
+		$route = count($route) == 2? $route[1]:'';
 		?>
 		@section('menu')
 
 		<ul class="nav menu">
-			<li class="{{$route == ''? 'active': ''}}"><a href="{{ route ('index') }}"><svg class="glyph stroked dashboard-dial">
+			<li class="{{$route == ''? 'active': ''}}"><a href="{{ route ('dashboard') }}"><svg class="glyph stroked dashboard-dial">
 						<use xlink:href="#stroked-dashboard-dial"></use>
 					</svg>{{__('dashboard')}}</a></li>
 			<li class="{{$route == 'user'? 'active': ''}}"><a href="{{ route('user') }}"><svg class="glyph stroked male user ">

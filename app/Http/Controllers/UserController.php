@@ -21,7 +21,7 @@ class UserController extends Controller
             session()->put('email', $user->email);
             session()->put('username', $user->username);
             session()->put('user_level', $user->user_level);
-            return redirect()->route('index');
+            return redirect()->route('dashboard');
         } else{
             session()->flash('loginFail', true);
             return view('admin.login', compact('email'));

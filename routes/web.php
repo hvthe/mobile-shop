@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\LanguageController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -24,7 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/login', function () {
     if(session()->has('email')){
-        return redirect()->route('index');
+        return redirect()->route('dashboard');
     }else{
         return view('admin.login');
     }
@@ -32,10 +33,10 @@ Route::get('/login', function () {
 
 Route::post('/login', [UserController::class, 'checkUser']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-Route::group(['middleware' => 'local'], function () {
-});
-Route::middleware('CheckLogin')->group (function (){
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+// Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (){
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
     
     Route::prefix('product')->group (function () {
@@ -86,6 +87,16 @@ Route::middleware('CheckLogin')->group (function (){
         Route::get('/delete', [CustomerController::class, 'destroy'])->name('delete-customer');
     });
 });
+Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/search', function (){
+    return view('frontend.search');
+});
+Route::get('/product', [FrontendController::class, 'product'])->name('productDetail');
+Route::get('/category', function (){
+    return view('frontend.category');
+});
+
+
 
 
 
