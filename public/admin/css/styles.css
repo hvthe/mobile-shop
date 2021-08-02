@@ -9,7 +9,7 @@ Version 1.0
 body {
 	background: #f1f4f7;
 	padding-top: 50px;
-	color: #5f6468;
+	color: #333;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 }
 
@@ -18,7 +18,8 @@ p {
 }
 
 a, a:hover, a:focus {
-	color: #30a5ff;
+	font-weight: 500;
+	color: #007eff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -831,7 +832,7 @@ h1.page-header {
 .fixed-table-container thead th {
 	background: #f7f7f8;
 	border-color: #ddd;
-	color: #5f6468;
+	color: #252729;
 	font-weight: 300;
 	font-size: 16px;
 }
@@ -983,7 +984,3 @@ h1.page-header {
 .align-middle {
     vertical-align: middle!important;
 }
-
-
-
-

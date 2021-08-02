@@ -7,7 +7,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,8 +35,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'local'], function () {
 });
 Route::middleware('CheckLogin')->group (function (){
-    Route::get('/', function (){
-        return view('admin.dashboard');})->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
     
     Route::prefix('product')->group (function () {
@@ -66,7 +68,7 @@ Route::middleware('CheckLogin')->group (function (){
     Route::prefix('order')->group (function () {
         Route::get('/', [OrderController::class, 'index'])->name('order');
         Route::get('/detail', [OrderController::class, 'detail'])->name('detail-order');
-       
+        // _____________
         Route::get('/create', [OrderController::class, 'create'])->name('create-order');
         Route::post('/store', [OrderController::class, 'store'])->name('store-order');
         Route::post('/update', [OrderController::class, 'update'])->name('update-order');
@@ -76,7 +78,7 @@ Route::middleware('CheckLogin')->group (function (){
     Route::prefix('customer')->group (function () {
         Route::get('/', [CustomerController::class, 'index'])->name('customer');
         Route::get('/history', [CustomerController::class, 'history'])->name('history-customer');
-        
+        // ____________
         Route::get('/create', [CustomerController::class, 'create'])->name('create-customer');
         Route::post('/store', [CustomerController::class, 'store'])->name('store-customer');
         Route::get('/show', [CustomerController::class, 'show'])->name('show-customer');

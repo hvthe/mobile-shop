@@ -20,7 +20,7 @@ class Language
             $language = session()->get('language');
             App::setLocale($language);
         }
-        echo App::currentLocale();
-        // return $next($request);
+        // echo App::currentLocale();
+        return $next($request);
     }
 }

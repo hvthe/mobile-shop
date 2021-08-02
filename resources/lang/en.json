@@ -1,0 +1,21 @@
+{
+    "dashboard":"Dashboard",
+    "user":"User",
+    "category":"Category",
+    "product":"Product",
+    "customer":"Customer",
+    "order":"Order",
+    "config":"Config",
+    "hello":"Hello",
+    "home":"Home",
+    "language":"Language",
+    "list-users":"List Users",
+    "add-user":"Add User",
+    "fullname":"Fullname",
+    "role":"Role",
+    "action":"Action",
+    "list-categories":"List Categories",
+    "add-category":"Add Category",
+    "brand":"Brand Name"
+
+}

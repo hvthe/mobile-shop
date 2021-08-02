@@ -1,6 +1,6 @@
 <div id="toolbar" class="btn-group">
 		<a href="{{ route('create-category') }}" class="btn btn-success">
-			<i class="glyphicon glyphicon-plus"></i> Thêm danh mục
+			<i class="glyphicon glyphicon-plus"></i> {{__('add-category')}}
 		</a>
 	</div>
 	<div class="row">
@@ -12,8 +12,8 @@
 						<thead>
 							<tr>
 								<th data-field="id" data-sortable="true">ID</th>
-								<th>Tên danh mục</th>
-								<th>Hành động</th>
+								<th>{{__('brand')}}</th>
+								<th>{{__('action')}}</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -1,0 +1,21 @@
+{
+    "dashboard":"Dashboard",
+    "user":"Thành viên",
+    "category":"Danh mục",
+    "product":"Sản phẩm",
+    "customer":"Khách hàng",
+    "order":"Đơn hàng",
+    "config":"Cấu hình",
+    "hello":"Chào",
+    "home":"Trang chủ",
+    "language":"Ngôn Ngữ",
+    "list-users":"Danh sách tài khoản",
+    "add-user":"Thêm tài khoản",
+    "fullname":"Họ & Tên",
+    "role":"Quyền",
+    "action":"Action",
+    "list-categories":"Danh sách danh mục",
+    "add-category":"Thêm danh mục",
+    "brand":"Tên danh mục"
+    
+}
