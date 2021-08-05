@@ -18,11 +18,13 @@
 		</div>
 	</div>
 	<!--/.row-->
-	@if(session()->exists('success'))
-	@foreach(session()->get('success') as $message)
-	<p class="alert alert-success" role="alert">{{ $message }}</p>
-	@endforeach
-	@endif
+	<div class="message">
+		@if(session()->exists('success'))
+		@foreach(session()->get('success') as $message)
+		<p class="alert alert-success" role="alert">{{ $message }}</p>
+		@endforeach
+		@endif
+	</div>
 	<div id="data-cat">
 		@include('admin.modules.category.data-cat')
 	</div>

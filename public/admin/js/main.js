@@ -20,7 +20,6 @@ if(input){
 
 var closeMessage = document.querySelector('.message')
 if(closeMessage){
-    console.log(6546);
 // for(var i = 0; i < $closeMessage.length; i++){
     closeMessage.onclick = function close(){
         closeMessage.style.display  = 'none';

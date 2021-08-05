@@ -10,6 +10,7 @@ class OrderDetail extends Model
     use HasFactory;
     protected $table = 'order_detail';
     protected $primaryKey = 'id';
+    public $timestamps = false;
 
     public function product()
     {

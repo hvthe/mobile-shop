@@ -11,3 +11,8 @@
 3. khong truy cap vao trang login khi da dang nhap
 # 01/08
 1. hiển thị đơn hàng, chi tiết đơn hàng
+#03/08
+chức năng phân quyền, ajax thêm, sửa cho category,
+#04/08
+1. hoàn thiện hiện thị các trang sản phẩm
+2. chức năng giỏ hàng, lưu thông tin đơn hàng vào db

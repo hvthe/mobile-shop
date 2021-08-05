@@ -29,7 +29,7 @@
                         <div id="menu" class="collapse navbar-collapse">
                             <ul>
                                 @foreach($categories as $category)
-                                <li class="menu-item"><a href="#">{{$category->cat_name}}</a></li>
+                                <li class="menu-item"><a href="{{route('front.category', ['cat_id' => $category->cat_id])}}">{{$category->cat_name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>

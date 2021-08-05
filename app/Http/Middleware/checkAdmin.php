@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckLogin
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,8 +17,10 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->has('user')){
-            return $next($request);
-        }else{return redirect()->route('login');}
+        if (Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+             return $next($request);
+        }else{
+            abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        }
     }
 }

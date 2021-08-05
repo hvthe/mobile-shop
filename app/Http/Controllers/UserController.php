@@ -5,44 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Gate;
 class UserController extends Controller
 {
-    public function checkUser(Request $request)
-    {
-        
-        $validated = $request->validate([
-            'email' => 'required|email|exists:users,email|min:8',
-            'password' => 'required|min:2',
-        ]);
-        $email = $request->email;
-        $password = md5($request->password);
-        $user = User::where('email', $email)->where('password', $password)->first();
-        if($user){
-            session()->put('email', $user->email);
-            session()->put('username', $user->username);
-            session()->put('user_level', $user->user_level);
-            return redirect()->route('dashboard');
-        } else{
-            session()->flash('loginFail', true);
-            return view('admin.login', compact('email'));
-        }
-    }
-    public function logout(){
-        session()->pull('email');
-        return redirect()->route('login');
-    }
     public function index()
     {
+        // if (!Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+        //     abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        // }
         $users = User::orderBy('user_id')->paginate(5);
         return view('admin.modules.user.user', compact('users'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
+        // if (!Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+        //     abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        // }
         return view('admin.modules.user.add_user');
     }
     public function store(Request $request)
     {
+        // if (!Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+        //     abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        // }
         $user = new User;
         $user->username = $request->username;
         $user->email = $request->email;
@@ -57,12 +43,18 @@ class UserController extends Controller
 
     public function show(Request $request)
     {
+        // if (!Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+        //     abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        // }
         $user_id = $request->id;
         $user = User::findOrFail($user_id);
         return view('admin.modules.user.edit_user', compact('user'));
     }
     public function update(Request $request)
     {
+        // if (!Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+        //     abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        // }
         $user_id = $request->id;
         $user = User::findOrFail($user_id);
         $user->username = $request->username;
@@ -77,6 +69,9 @@ class UserController extends Controller
     }
     public function destroy(Request $request)
     {
+        // if (!Gate::forUser(session()->get('user'))->allows('view-page-admin')) {
+        //     abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        // }
         $user_id = $request->id;
         $user = User::findOrFail($user_id);
         $user->delete();

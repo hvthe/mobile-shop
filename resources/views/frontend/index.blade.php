@@ -57,9 +57,13 @@
         @foreach($featureProducts as $product)
         <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
             <div class="product-item card text-center">
-                <a href="{{route('productDetail', ['id'=>$product->prd_id])}}"><img src="{{ asset('admin/images/'.$product->prd_image)}}"></a>
-                <h4><a href="{{route('productDetail', ['id'=>$product->prd_id])}}">{{$product->prd_name}}</a></h4>
+                <a href="{{route('front.product', ['id'=>$product->prd_id])}}"><img src="{{ asset('admin/images/'.$product->prd_image)}}"></a>
+                <h4><a href="{{route('front.product', ['id'=>$product->prd_id])}}">{{$product->prd_name}}</a></h4>
                 <p>Giá Bán: <span>{{ number_format($product->prd_price)}}đ</span></p>
+                <div>
+                    <a class="btn btn-success btn-sm" href="{{route('cart', ['id' => $product->prd_id])}}">Mua ngay</a>
+                    <a class="btn btn-warning btn-sm" href="{{route('cart')}}">Thêm vào giỏ hàng</a>
+                </div>
             </div>
         </div>
         @endforeach
@@ -75,9 +79,13 @@
         @foreach($lastProducts as $product)
         <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
             <div class="product-item card text-center">
-                <a href="#"><img src="{{ asset('admin/images/'.$product->prd_image)}}"></a>
-                <h4><a href="#">{{$product->prd_name}}</a></h4>
+                <a href="{{route('front.product', ['id'=>$product->prd_id])}}"><img src="{{ asset('admin/images/'.$product->prd_image)}}"></a>
+                <h4><a href="{{route('front.product', ['id'=>$product->prd_id])}}">{{$product->prd_name}}</a></h4>
                 <p>Giá Bán: <span>{{ number_format($product->prd_price)}}đ</span></p>
+                <div>
+                    <a class="btn btn-success btn-sm" href="{{route('cart', ['id' => $product->prd_id])}}">Mua ngay</a>
+                    <a class="btn btn-warning btn-sm" href="{{route('cart')}}">Thêm vào giỏ hàng</a>
+                </div>
             </div>
         </div>
         @endforeach

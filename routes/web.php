@@ -9,8 +9,10 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\LanguageController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +33,8 @@ Route::get('/login', function () {
     }
 })->name('login');
 
-Route::post('/login', [UserController::class, 'checkUser']);
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/login', [LoginController::class, 'checkUser']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (){
@@ -57,7 +59,7 @@ Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (
         Route::get('/delete', [CategoryController::class, 'destroy'])->name('delete-category');
     });
     
-    Route::prefix('user')->group (function () {
+    Route::group (['prefix' => 'user', 'middleware' => 'checkAdmin'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::get('/add', [UserController::class, 'create'])->name('add-user');
         Route::post('/store', [UserController::class, 'store'])->name('store-user');
@@ -87,14 +89,18 @@ Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (
         Route::get('/delete', [CustomerController::class, 'destroy'])->name('delete-customer');
     });
 });
+
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/search', function (){
     return view('frontend.search');
 });
-Route::get('/product', [FrontendController::class, 'product'])->name('productDetail');
-Route::get('/category', function (){
-    return view('frontend.category');
-});
+Route::get('/product', [FrontendController::class, 'product'])->name('front.product');
+Route::get('/category', [FrontendController::class, 'category'])->name('front.category');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart/store', [CartController::class, 'storeCart'])->name('cart.store');
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+Route::get('/cart/delete', [CartController::class, 'delete'])->name('cart.delete');
+Route::post('/cart/order', [CartController::class, 'order'])->name('cart.order');
 
 
 

@@ -2,7 +2,7 @@
 	<div class="container">
     	<div class="row">
         	<div id="logo" class="col-lg-3 col-md-3 col-sm-12">
-            	<h1><a href="#"><img class="img-fluid" width = "80%" src="{{ asset('frontend/logo.png')}}"></a></h1>
+            	<h1><a href="{{route('index')}}"><img class="img-fluid" width = "80%" src="{{ asset('frontend/logo.png')}}"></a></h1>
             </div>
             <div id="search" class="col-lg-6 col-md-6 col-sm-12">
                 <form class="form-inline">
@@ -12,7 +12,7 @@
             </div>
             <div id="cart" class="col-lg-3 col-md-3 col-sm-12">
                 <a href="{{route('login')}}" class="mt-4 mr-2">Đăng nhập</a>
-            	<a class="mt-4 mr-2" href="#">giỏ hàng</a><span class="mt-3">8</span>
+            	<a class="mt-4 mr-2" href="{{route('cart')}}">giỏ hàng</a><span class="mt-3">{{ session()->has('cart')? array_sum(session()->get('cart')) : 0}}</span>
             </div>
         </div>
     </div>

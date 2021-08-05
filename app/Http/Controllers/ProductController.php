@@ -16,8 +16,9 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $products = Product::orderBy('prd_id', 'desc')->paginate(5);
+        // dd($request->ajax());
         if($request->ajax()){
-        return view('admin.modules.product.list-data', compact('products', 'categories'))->render();
+        return view('admin.modules.product.list-data', compact('products', 'categories'));
         }
         return view('admin.modules.product.product', compact('products', 'categories'));
     }

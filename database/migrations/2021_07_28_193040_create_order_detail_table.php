@@ -17,7 +17,6 @@ class CreateOrderDetailTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('ord_id');
             $table->integer('prd_id');
-            $table->integer('price');
             $table->integer('quantity');
         });
     }

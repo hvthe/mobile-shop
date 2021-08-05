@@ -1,4 +1,4 @@
-@extends('frontend.index')
+@extends('frontend.app')
 @section('title', 'Category')
 @section('css')
 <link rel="stylesheet" href="{{ asset('frontend/css/category.css')}}">
@@ -52,82 +52,33 @@
 
 <!--	List Product	-->
 <div class="products">
-    <h3>iPhone (hiện có 186 sản phẩm)</h3>
+    <h3>{{ $category }} (hiện có {{$products->count()}} sản phẩm)</h3>
     <div class="product-list row">
+    @foreach($products as $product)
         <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
             <div class="product-item card text-center">
-                <a href="#"><img src="images/product-1.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
+                <a href="{{route('front.product', ['id'=>$product->prd_id])}}"><img src="{{ asset('admin/images/'.$product->prd_image)}}"></a>
+                <h4><a href="{{route('front.product', ['id'=>$product->prd_id])}}">{{$product->prd_name}}</a></h4>
+                <p>Giá Bán: <span>{{ number_format($product->prd_price)}}đ</span></p>
+                <div>
+                    <a class="btn btn-success btn-sm" href="{{route('cart', ['id' => $product->prd_id])}}">Mua ngay</a>
+                    <a class="btn btn-warning btn-sm" href="{{route('cart')}}">Thêm vào giỏ hàng</a>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-2.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-3.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-4.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-5.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-6.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-7.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-8.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mx-product">
-            <div class="product-item card text-center">
-                <a href="#"><img src="images/product-9.png"></a>
-                <h4><a href="#">iPhone Xs Max 2 Sim - 256GB</a></h4>
-                <p>Giá Bán: <span>32.990.000đ</span></p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 <!--	End List Product	-->
 
 <div id="pagination">
-    <ul class="pagination">
+    {{ $products->links()}}
+    <!-- <ul class="pagination">
         <li class="page-item"><a class="page-link" href="#">Trang trước</a></li>
         <li class="page-item active"><a class="page-link" href="#">1</a></li>
         <li class="page-item"><a class="page-link" href="#">2</a></li>
         <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
-    </ul>
+    </ul> -->
 </div>
 @endsection

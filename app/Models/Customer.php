@@ -10,6 +10,7 @@ class Customer extends Model
     use HasFactory;
     protected $table = 'customers';
     protected $primaryKey = 'customer_id';
+    public $timestamps = false;
 
     public function orders()
     {

@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         $categories = Category::orderBy('cat_id', 'desc')->paginate(5);
         if($request->ajax()){
-            return view('admin.modules.category.data-cat', compact('categories'))->render();
+            return view('admin.modules.category.data-cat', compact('categories'));
         }
         return view('admin.modules.category.category', compact('categories'));
     }
@@ -37,7 +37,8 @@ class CategoryController extends Controller
         $category->cat_name = $request->cat_name;
         $category->save();
         session()->flash('success.created', 'Created');
-        return redirect()->route('category');
+        $message = 'Created Success';
+        return $message;
     }
 
     public function show(Request $request)
@@ -60,7 +61,8 @@ class CategoryController extends Controller
         $category->cat_name = $request->cat_name;
         $category->save();
         session()->flash('success.updated', 'Updated');
-        return redirect()->route('category');
+        // return redirect()->route('category');
+        return 'success';
     }
 
     public function destroy(Request $request)

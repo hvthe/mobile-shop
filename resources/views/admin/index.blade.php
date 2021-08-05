@@ -7,18 +7,20 @@
 	<title>@yield('title')</title>
 
 	<link href="{{ asset ('admin/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="./admin/css/datepicker3.css" rel="stylesheet">
+	<link href="{{ asset ('admin/css/datepicker3.css') }}" rel="stylesheet">
 	<link href="{{ asset ('admin/css/bootstrap-table.css') }}" rel="stylesheet">
 	<link href="{{ asset ('admin/css/styles.css') }}" rel="stylesheet">
 	<!-- <link href="{{ asset ('admin/css/stilcopy.css') }}" rel="stylesheet"> -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--Icons-->
+	
 	<script src="{{ asset ('admin/js/lumino.glyphs.js') }}"></script>
+	<script src="{{ asset ('admin/js/jquery-1.11.1.min.js') }}"></script>
 
-	<!--[if lt IE 9]>
+	<!-- [if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
-<![endif]-->
+<![endif] -->
 
 </head>
 
@@ -37,7 +39,7 @@
 					<li class="dropdown pull-right">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user">
 								<use xlink:href="#stroked-male-user"></use>
-							</svg> {{__('hello')}} {{session()->get('username')}} <span class="caret"></span></a>
+							</svg> {{__('hello')}} {{session()->get('user')->username}} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#"><svg class="glyph stroked male-user">
 										<use xlink:href="#stroked-male-user"></use>
@@ -62,7 +64,7 @@
 		</form>
 		<?php $route = Route::current()->uri;
 		$route = explode('/', $route);
-		$route = count($route) == 2? $route[1]:'';
+		$route = count($route) > 1? $route[1]:'';
 		?>
 		@section('menu')
 
@@ -70,9 +72,11 @@
 			<li class="{{$route == ''? 'active': ''}}"><a href="{{ route ('dashboard') }}"><svg class="glyph stroked dashboard-dial">
 						<use xlink:href="#stroked-dashboard-dial"></use>
 					</svg>{{__('dashboard')}}</a></li>
+			@if(session()->get('user')->user_level == 1)
 			<li class="{{$route == 'user'? 'active': ''}}"><a href="{{ route('user') }}"><svg class="glyph stroked male user ">
 						<use xlink:href="#stroked-male-user" />
 					</svg>{{__('user')}}</a></li>
+			@endif
 			<li class="{{$route == 'category'? 'active': ''}}"><a href="{{ route('category') }}"><svg class="glyph stroked open folder">
 						<use xlink:href="#stroked-open-folder" />
 					</svg>{{__('category')}}</a></li>
@@ -120,7 +124,6 @@
 	<!--/.sidebar-->
 	@yield('content')
 	<!--/.main-->
-
 	<script src="{{ asset ('admin/js/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ asset ('admin/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset ('admin/js/bootstrap-table.js') }}"></script>

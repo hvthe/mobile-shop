@@ -6,20 +6,27 @@
 @section('content')
 <div id="product-head" class="row">
     <div id="product-img" class="col-lg-6 col-md-6 col-sm-12">
-        <img src="images/product-1.png">
+        <img src="{{asset('admin/images/'.$product->prd_image )}}">
     </div>
     <div id="product-details" class="col-lg-6 col-md-6 col-sm-12">
-        <h1>iPhone X - 64GB Silver</h1>
+        <h1>{{$product->prd_name}}</h1>
         <ul>
-            <li><span>Bảo hành:</span> 12 Tháng</li>
-            <li><span>Đi kèm:</span> Hộp, sách, sạc, cáp, tai nghe</li>
-            <li><span>Tình trạng:</span> Máy Mới 100%</li>
-            <li><span>Khuyến Mại:</span> Dán Màn Hình 3 lớp</li>
+            <li><span>Bảo hành:</span> {{$product->prd_warranty}}</li>
+            <li><span>Đi kèm:</span> {{$product->prd_accessories}}</li>
+            <li><span>Tình trạng:</span> {{$product->prd_new}}</li>
+            <li><span>Khuyến Mại:</span> {{$product->prd_promotion}}</li>
             <li id="price">Giá Bán (chưa bao gồm VAT)</li>
-            <li id="price-number">22.990.000đ</li>
+            <li id="price-number">{{number_format($product->prd_price)}}đ</li>
+            @if($product->prd_status == 1)
             <li id="status">Còn hàng</li>
+            @else
+            <li class = "text-danger font-weight-bold">Hết hàng</li>
+            @endif
         </ul>
-        <div id="add-cart"><a href="#">Mua ngay</a></div>
+        <div>
+            <a  class = "btn btn-success" href="{{route('cart', ['id' => $product->prd_id])}}">Mua ngay</a>
+            <a class = "btn btn-warning" href="{{route('cart')}}">Thêm vào giỏ hàng</a>
+        </div>
     </div>
 </div>
 <div id="product-body" class="row">

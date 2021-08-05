@@ -21,7 +21,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-md-8">
-                            	<div class="alert alert-danger">Email đã tồn tại !</div>
+                            	<!-- <div class="alert alert-danger">Email đã tồn tại !</div> -->
                                 <form role="form" method="post" action = "{{ route('store-user') }}">
                                 @csrf
                                 <div class="form-group">
