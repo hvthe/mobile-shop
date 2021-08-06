@@ -16,8 +16,12 @@ class CartController extends Controller
     public function cart(Request $request)
     {
         $categories = Category::all();
+        
         if ($request->id) {
             $this->storeCart($request);
+        }
+        if(empty(session()->get('cart'))){
+            return view('frontend.cart', compact('categories'));
         }
         $cart = session()->get('cart');
         $prd_id_list = [];

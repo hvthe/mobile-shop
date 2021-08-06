@@ -12,7 +12,7 @@ use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,12 +88,14 @@ Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (
         Route::post('/update', [CustomerController::class, 'update'])->name('update-customer');
         Route::get('/delete', [CustomerController::class, 'destroy'])->name('delete-customer');
     });
+    Route::prefix('config')->group (function () {
+        Route::get('/', [ConfigController::class, 'index'])->name('config');
+
+    });
 });
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
-Route::get('/search', function (){
-    return view('frontend.search');
-});
+Route::get('/search', [FrontendController::class, 'search'])->name('front.search');
 Route::get('/product', [FrontendController::class, 'product'])->name('front.product');
 Route::get('/category', [FrontendController::class, 'category'])->name('front.category');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');

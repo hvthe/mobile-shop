@@ -2,11 +2,12 @@
 	<div class="container">
     	<div class="row">
         	<div id="logo" class="col-lg-3 col-md-3 col-sm-12">
-            	<h1><a href="{{route('index')}}"><img class="img-fluid" width = "80%" src="{{ asset('frontend/logo.png')}}"></a></h1>
+            	<h1><a href="{{route('index')}}"><img class="img-fluid" width = "80%" src="{{ asset('frontend/images/logo.png')}}"></a></h1>
             </div>
             <div id="search" class="col-lg-6 col-md-6 col-sm-12">
-                <form class="form-inline">
-                    <input class="form-control mt-3" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                <form class="form-inline" action="{{route('front.search')}}" method="get">
+                    @csrf
+                    <input class="form-control mt-3" name = "keyWord" type="search" placeholder="Tìm kiếm" aria-label="Search">
                     <button class="btn mt-3" type="submit">Tìm kiếm</button>
                 </form>
             </div>

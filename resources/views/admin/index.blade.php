@@ -89,16 +89,16 @@
 			<li class="{{$route == 'order'? 'active': ''}}"><a href="{{route('order')}}"><svg class="glyph stroked clipboard with paper">
 						<use xlink:href="#stroked-clipboard-with-paper"></use>
 					</svg>{{__('order')}}</a></li>
-			<li><a href="#"><svg class="glyph stroked gear">
+			<li class="{{$route == 'config'? 'active': ''}}"><a href="{{route('config')}}"><svg class="glyph stroked gear">
 						<use xlink:href="#stroked-gear" />
 					</svg>{{__('config')}}</a></li>
 			<li class="dropdown">
 				<a href="#" style= "color: #30a5ff" class="dropdown-toggle" data-toggle="dropdown">
 					{{ __('language')}}
-					@if(session()->get('language')=='en')
-					<img src="{{asset('admin/img/eng.png')}}" width="20px" alt="">
-					@else
+					@if(session()->get('language')=='vn')
 					<img src="{{asset('admin/img/vn.png')}}" width="20px" alt="">
+					@else
+					<img src="{{asset('admin/img/eng.png')}}" width="20px" alt="">
 					@endif
 					<span class="caret"></span>
 				</a>

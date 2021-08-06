@@ -32,5 +32,18 @@ class FrontendController extends Controller
         $products = Product::where('cat_id', $cat_id)->paginate(6);
         return view('frontend.category', compact('categories', 'products', 'category'));
     }
+    public function search(Request $request)
+    {
+        $categories = Category::all();
+        $keyWord = $request->keyWord;
+        $words = explode(' ', $keyWord);
+        $keyWordNew = '%';
+        foreach($words as $word){
+            $keyWordNew .= "{$word}%";
+        }
+        $products = Product::where('prd_name', 'like', $keyWordNew)->paginate(6);
+        $products->withPath("/search?_token=$request->_token&keyWord=$keyWord");
+        return view('frontend.search', compact('categories', 'products', 'keyWord'));
+    }
     
 }
