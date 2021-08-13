@@ -984,3 +984,6 @@ h1.page-header {
 .align-middle {
     vertical-align: middle!important;
 }
+.dropdown-item.btn:hover{
+	background-color: rgb(226, 223, 223);
+}

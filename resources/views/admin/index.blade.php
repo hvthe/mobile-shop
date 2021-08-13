@@ -59,7 +59,7 @@
 		@csrf
 		<form role="search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<!-- <input type="text" class="form-control" placeholder="Search"> -->
 			</div>
 		</form>
 		<?php $route = Route::current()->uri;

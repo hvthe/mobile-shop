@@ -1,5 +1,5 @@
 @extends('frontend.app')
-@section('title', 'Product')
+@section('title', 'Cart')
 @section('css')
 <link rel="stylesheet" href="{{ asset('frontend/css/cart.css')}}">
 @endsection
@@ -57,30 +57,9 @@
         <div class="cart-nav-item col-lg-2 col-md-2 col-sm-12">Tùy chọn</div>
         <div class="cart-nav-item col-lg-3 col-md-3 col-sm-12">Giá</div>
     </div>
-    <form method="post" action="{{ route('cart.update')}}">
-        @csrf
-        @foreach($products as $product)
-        <div class="cart-item row">
-            <div class="cart-thumb col-lg-7 col-md-7 col-sm-12">
-                <img src="{{asset('admin/images/'.$product->prd_image)}}">
-                <h4>{{ $product->prd_name }}</h4>
-            </div>
-
-            <div class="cart-quantity col-lg-2 col-md-2 col-sm-12">
-                <input type="number" name="quantity[{{ $product->prd_id }}]" id="quantity" class="form-control form-blue quantity" value="{{ $cart[$product->prd_id] }}" min="1">
-            </div>
-            <div class="cart-price col-lg-3 col-md-3 col-sm-12"><b>{{ number_format($product->prd_price) }}đ</b><a href="{{route('cart.delete',['id' => $product->prd_id])}}">Xóa</a></div>
-        </div>
-        @endforeach
-        <div class="row">
-            <div class="cart-thumb col-lg-7 col-md-7 col-sm-12">
-                <button id="update-cart" class="btn btn-success" type="submit" name="sbm">Cập nhật giỏ hàng</button>
-            </div>
-            <div class="cart-total col-lg-2 col-md-2 col-sm-12"><b>Tổng cộng:</b></div>
-            <div class="total-bill cart-price col-lg-3 col-md-3 col-sm-12"><b>{{ number_format($total) }}đ</b></div>
-        </div>
-
-    </form>
+    <div id="cart-item">
+        @include('frontend.cart-item')
+    </div>
 
 </div>
 <!--	End Cart	-->
@@ -139,6 +118,7 @@
     </div>
 </div>
 <!--	End Customer Info	-->
+<div class="row mt-3"></div>
 @else
 <div class="row mt-3">
     <div class="col-lg-12 col-md-12 col-sm-12">

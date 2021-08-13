@@ -51,7 +51,7 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'cat_name' => 'required|min:6|max:30'
+            'cat_name' => 'required|min:2|max:30'
         ], [
             'required' => 'Không được để trống',
             'min' => 'Độ dài có ít nhất 6 ký tự'

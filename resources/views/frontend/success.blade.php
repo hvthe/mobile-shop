@@ -1,7 +1,7 @@
 @extends('frontend.app')
 @section('title', 'Category')
 @section('css')
-<link rel="stylesheet" href="{{ asset('frontend/css/category.css')}}">
+<link rel="stylesheet" href="{{ asset('frontend/css/success.css')}}">
 @endsection
 @section('content')
 <!--	Slider	-->

@@ -14,9 +14,11 @@ class CreateConfigTable extends Migration
     public function up()
     {
         Schema::create('config', function (Blueprint $table) {
+            $table->string('title');
+            $table->string('logo');
             $table->string('address');
-            $table->string('info');
-            $table->string('banner');
+            $table->string('service');
+            $table->string('hotline');
             $table->string('slide');
         });
     }

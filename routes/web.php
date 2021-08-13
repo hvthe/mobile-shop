@@ -48,6 +48,8 @@ Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (
         Route::get('/show', [ProductController::class, 'show'])->name('show-product');
         Route::post('/update', [ProductController::class, 'update'])->name('update-product');
         Route::get('/delete', [ProductController::class, 'destroy'])->name('delete-product');
+        Route::get('/filter/{cat_id}', [ProductController::class, 'filter'])->name('filter-product');
+        Route::get('/search', [ProductController::class, 'search'])->name('search-product');
     });
     
     Route::prefix('category')->group (function () {
@@ -90,6 +92,8 @@ Route::group([ 'prefix' => 'shop.admin', 'middleware'=>'CheckLogin'], function (
     });
     Route::prefix('config')->group (function () {
         Route::get('/', [ConfigController::class, 'index'])->name('config');
+        Route::get('/show', [ConfigController::class, 'show'])->name('show-config');
+        Route::post('/update', [ConfigController::class, 'update'])->name('update-config');
 
     });
 });

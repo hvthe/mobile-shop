@@ -1,7 +1,32 @@
 <div id="toolbar" class="btn-group">
-	<a href="{{ route('create-product')}}" class="btn btn-success">
-		<i class="glyphicon glyphicon-plus"></i> Thêm sản phẩm
-	</a>
+	<div class="container">
+		<div class="row col-lg-2">
+			<a href="{{ route('create-product')}}" class="btn btn-success">
+				<i class="glyphicon glyphicon-plus"></i> Thêm sản phẩm
+			</a>
+		</div>
+		<div class="row col-lg-5">
+			<form class="form-inline" action="{{route('search-product')}}">
+				@csrf
+				<input type="text" class="form-control" style="width: 80%" name = "keyWord" placeholder="Search Product">
+				<button type="submit" class="btn btn-primary mb-2">Search</button>
+			</form>
+		</div>
+		<div class="row col-lg-2">
+			<div class="dropdown">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Filter
+				</button>
+
+				<div class="dropdown-menu" style="max-height: 500px;" aria-labelledby="dropdownMenuLink">
+					@foreach($categories as $category)
+					<a class="dropdown-item btn" style="display: block; color: #333;" href="{{route('filter-product', $category->cat_id)}}">{{$category->cat_name}}</a>
+					@endforeach
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
 <div class="row">
 	<div class="col-lg-12">
@@ -72,25 +97,23 @@
 
 <script src="{{ asset ('admin/js/bootstrap-table.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function (){
-	var pageLinks = document.querySelectorAll('a.page-link');
-	console.log(pageLinks[0])
-	for (var i = 0; i < pageLinks.length; i++) {
-		var pageLink = pageLinks[i];
-		pageLink.onclick = function(event) {
-			event.preventDefault();
-			link = this.href;
-			console.log(2)
-			$.ajax({
-				url: link,
-				type: "GET",
-				dataType: 'html',
-			}).done(function(data) {
-				$('#list-data').html(data);
-				// document.querySelector('#list-data').innerHTML = data
-			});
-		}
+	$(document).ready(function() {
+		var pageLinks = document.querySelectorAll('a.page-link');
+		for (var i = 0; i < pageLinks.length; i++) {
+			var pageLink = pageLinks[i];
+			pageLink.onclick = function(event) {
+				event.preventDefault();
+				link = this.href;
+				$.ajax({
+					url: link,
+					type: "GET",
+					dataType: 'html',
+				}).done(function(data) {
+					$('#list-data').html(data);
+					// document.querySelector('#list-data').innerHTML = data
+				});
+			}
 
-	}
-})
+		}
+	})
 </script>

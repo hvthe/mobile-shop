@@ -63,7 +63,7 @@
 											</div>
 											<div class="modal-footer">
 												<button class="btn btn-secondary" data-dismiss="modal">Close</button>
-												<button onclick = "updateCategory({{ $category->cat_id }})" id="" class="btn btn-primary update-btn">Update</button>
+												<button onclick = "updateCategory('{{ $category->cat_id }}')" id="" class="btn btn-primary update-btn">Update</button>
 											</div>
 
 										</div>

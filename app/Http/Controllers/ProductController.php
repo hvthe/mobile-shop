@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UpdateProduct;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,6 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $products = Product::orderBy('prd_id', 'desc')->paginate(5);
-        // dd($request->ajax());
         if($request->ajax()){
         return view('admin.modules.product.list-data', compact('products', 'categories'));
         }
@@ -116,5 +116,26 @@ class ProductController extends Controller
         // Storage::delete($product->prd_image);
         session()->flash('success.delete', 'Deleted');
         return redirect()->route('product');
+    }
+
+    public function filter($cat_id)
+    {
+        $categories = Category::all();
+        $products = Product::where('cat_id', $cat_id)->paginate(5);
+        return view('admin.modules.product.product', compact('products', 'categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $categories = Category::all();
+        $keyWord = $request->keyWord;
+        $words = explode(' ', $keyWord);
+        $keyWordNew = '%';
+        foreach($words as $word){
+            $keyWordNew .= "{$word}%";
+        }
+        $products = Product::where('prd_name', 'like', $keyWordNew)->paginate(6);
+        $products->withPath("/search?_token=$request->_token&keyWord=$keyWord");
+        return view('admin.modules.product.product', compact('products', 'categories'));
     }
 }

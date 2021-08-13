@@ -7,6 +7,7 @@
     <title>@yield('title', 'Home')</title>
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{ asset('frontend/css/home.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/toast.css')}}">
     @yield('css')
     <script src="{{ asset('frontend/js/jquery-3.3.1.js')}}"></script>
     <script src="{{ asset('frontend/js/bootstrap.js')}}"></script>
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+    <div id="toast"></div>
 
     <!--	Header	-->
     @include('frontend.header')
@@ -72,5 +74,28 @@
     @include('frontend.footer')
     <!--	End Footer	-->
 </body>
+<script src="{{ asset('frontend/js/toast.js')}}"></script>
+<script>
+    // update số lượng lên lên icon giỏ hàng
+    var cartQtt = document.querySelector('.cart-qtt')
+    var btn = document.querySelectorAll('.btn.btn-warning.btn-sm')
+    console.log();
+    for (var i = 0; i < btn.length; i++) {
+        btn[i].onclick = function(event) {
+            event.preventDefault();
+            $('.alert.alert-success').alert('close');
+            var prd_id = this.getAttribute('data-id');
+            var link = "{{ route('cart.store') }}?id=" + prd_id;
+            console.log()
+            $.ajax({
+                url: link,
+                type: "GET",
+            }).done(function (data){
+                toast()
+                cartQtt.innerText = data;
+            })
+        }
+    }
+</script>
 
 </html>

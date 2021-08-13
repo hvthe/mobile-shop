@@ -15,8 +15,8 @@
                 <h4><a href="{{route('front.product', ['id'=>$product->prd_id])}}">{{$product->prd_name}}</a></h4>
                 <p>Giá Bán: <span>{{ number_format($product->prd_price)}}đ</span></p>
                 <div>
-                    <a class="btn btn-success btn-sm" href="{{route('cart', ['id' => $product->prd_id])}}">Mua ngay</a>
-                    <a class="btn btn-warning btn-sm" href="{{route('cart')}}">Thêm vào giỏ hàng</a>
+                    <a class="btn btn-success btn-sm" href="{{route('cart.store', ['id' => $product->prd_id])}}">Mua ngay</a>
+                    <button class="btn btn-warning btn-sm" data-id = "{{$product->prd_id}}">Thêm vào giỏ hàng</button>
                 </div>
             </div>
         </div>

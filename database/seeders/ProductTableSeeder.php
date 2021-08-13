@@ -15,6 +15,26 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
+        // $products = DB::table('product')->get();
+        // foreach($products as $product){
+        //     DB::table('products')->insert([
+        //     'cat_id' => $product->cat_id,
+        //     'prd_name' => $product->prd_name,
+        //     'prd_price' => '10000000',
+        //     'prd_image' => $product->prd_image,
+        //     'prd_warranty' => $product->prd_warranty,
+        //     'prd_accessories' => $product->prd_accessories,
+        //     'prd_new' => $product->prd_new,
+        //     'prd_promotion' => $product->prd_promotion,
+        //     'prd_status' => $product->prd_status,
+        //     'prd_featured' => $product->prd_featured,
+        //     'related_products' => '5,4,8,10,13,7,6',
+        //     'view' => rand(100, 500),
+        //     'prd_details' => $product->prd_details,
+        //     'created_at' => date('Y-m-d H:i:s'),
+        //     'updated_at' => date('Y-m-d H:i:s')
+        //     ]);
+        // }
         for($i = 0; $i < 2; $i++){
             DB::table('products')->insert([
                 'cat_id' => rand(1, 8),

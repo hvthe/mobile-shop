@@ -12,8 +12,9 @@
                 </form>
             </div>
             <div id="cart" class="col-lg-3 col-md-3 col-sm-12">
-                <a href="{{route('login')}}" class="mt-4 mr-2">Đăng nhập</a>
-            	<a class="mt-4 mr-2" href="{{route('cart')}}">giỏ hàng</a><span class="mt-3">{{ session()->has('cart')? array_sum(session()->get('cart')) : 0}}</span>
+                <!-- <a href="{{route('login')}}" class="mt-4 mr-2">Đăng nhập</a> -->
+            	<a class="mt-4 mr-2" href="{{route('cart')}}">giỏ hàng</a>
+                <span class="mt-3 cart-qtt">{{ session()->has('cart')? array_sum(session()->get('cart')) : 0}}</span>
             </div>
         </div>
     </div>

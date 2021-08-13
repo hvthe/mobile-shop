@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Config extends Model
 {
+    
     use HasFactory;
+    protected $table = 'config';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
 }
